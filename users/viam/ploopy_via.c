@@ -7,13 +7,16 @@
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
+    
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
         eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
+        // pointing_device_config_read(&ploopyvia_config.drashna_accel_config);
     }
 
     void ploopyvia_config_save(void) {
         // eeconfig_update_user(ploopyvia_config.raw);
+        // ploopyvia_config.drashna_accel_config = g_pointing_device_accel_config;
         eeconfig_update_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "mouse_gesture.h"
+// #include "pointing_device_accel.h"
+// #include "pointing_device_internal.h"
 
 void ploopyvia_config_set_value( uint8_t *data );
 void ploopyvia_config_get_value( uint8_t *data );
@@ -38,6 +40,11 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right,
+    // id_drashna_accel_pointing_device_takeoff = 91,
+    // id_drashna_accel_pointing_device_growth_rate,
+    // id_drashna_accel_pointing_device_offset,
+    // id_drashna_accel_pointing_device_limit,
+    // id_drashna_accel_pointing_device_enabled,
 };
 
 typedef struct {
@@ -69,6 +76,12 @@ typedef struct {
     uint16_t dragscroll_dragact_b_down;
     uint16_t dragscroll_dragact_b_left;
     uint16_t dragscroll_dragact_b_right;
+    // bool  pointing_device_accel_enabled : 1;
+    // float pointing_device_accel_growth_rate;
+    // float pointing_device_accel_offset;
+    // float pointing_device_accel_limit;
+    // float pointing_device_accel_takeoff;
+    // pointing_device_accel_config_t drashna_accel_config;
 } via_ploopystuff_config;
 
 via_ploopystuff_config ploopyvia_config;
