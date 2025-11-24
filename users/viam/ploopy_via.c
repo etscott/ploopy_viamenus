@@ -7,16 +7,14 @@
     #include "mouse_jiggler.h"
     #include "ploopy_via.h"
     #include "mouse_gesture.h"
-    
+
     void ploopyvia_config_load(void) {
         // ploopyvia_config.raw = eeconfig_read_user();
         eeconfig_read_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
-        // pointing_device_config_read(&ploopyvia_config.drashna_accel_config);
     }
 
     void ploopyvia_config_save(void) {
         // eeconfig_update_user(ploopyvia_config.raw);
-        // ploopyvia_config.drashna_accel_config = g_pointing_device_accel_config;
         eeconfig_update_user_datablock(&ploopyvia_config, 0, EECONFIG_USER_DATA_SIZE);
     }
 
@@ -29,12 +27,21 @@
         eeconfig_update_kb(keyboard_config.raw);
     }
 
+    void update_acceleration(void) {
+        pointing_device_accel_enabled(ploopyvia_config.maccel_config.enabled);
+        pointing_device_accel_set_takeoff(ploopyvia_config.maccel_config.takeoff);
+        pointing_device_accel_set_growth_rate(ploopyvia_config.maccel_config.growth_rate);
+        pointing_device_accel_set_offset(ploopyvia_config.maccel_config.offset);
+        pointing_device_accel_set_limit(ploopyvia_config.maccel_config.limit);
+    }
+
     void keyboard_post_init_user_viamenus(void) {
         ploopyvia_config_load();
         if(ploopyvia_config.dpi_multiplier == 0){
             eeconfig_init_user();
         }
         update_dpi();
+        update_acceleration();
         ploopy_msGestureUpdate();
         led_update_better_dragscroll(host_keyboard_led_state());
         dprintf("keyboard_post_init_user\n");
@@ -253,6 +260,36 @@
                 ploopyvia_config.dragscroll_dragact_b_right = value_data[0] << 8 | value_data[1];
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
+
+            case id_ploopystuff_maccel_enabled:
+                ploopyvia_config.maccel_config.enabled = *value_data;
+                dprintf("PDACCEL Mouse acceleration acceleration enabled: %d\n", ploopyvia_config.maccel_config.enabled);
+                pointing_device_accel_enabled(ploopyvia_config.maccel_config.enabled);
+                break;
+
+            case id_ploopystuff_maccel_takeoff:
+                ploopyvia_config.maccel_config.takeoff = (float)value_data[0]/20;
+                dprintf("PDACCEL Mouse acceleration acceleration takeoff: %f\n", ploopyvia_config.maccel_config.takeoff);
+                pointing_device_accel_set_takeoff(ploopyvia_config.maccel_config.takeoff);
+                break;
+
+            case id_ploopystuff_maccel_growth_rate:
+                ploopyvia_config.maccel_config.growth_rate = (float)value_data[0]/20;
+                dprintf("PDACCEL Mouse acceleration acceleration growth rate: %f\n", ploopyvia_config.maccel_config.growth_rate);
+                pointing_device_accel_set_growth_rate(ploopyvia_config.maccel_config.growth_rate);
+                break;
+
+            case id_ploopystuff_maccel_offset:
+                ploopyvia_config.maccel_config.offset = (float)value_data[0]/10;
+                dprintf("PDACCEL Mouse acceleration acceleration offset: %f\n", ploopyvia_config.maccel_config.offset);
+                pointing_device_accel_set_offset(ploopyvia_config.maccel_config.offset);
+                break;
+
+            case id_ploopystuff_maccel_limit:
+                ploopyvia_config.maccel_config.limit = (float)value_data[0]/20;
+                dprintf("PDACCEL Mouse acceleration acceleration offset: %f\n", ploopyvia_config.maccel_config.limit);
+                pointing_device_accel_set_limit(ploopyvia_config.maccel_config.limit);
+                break;
         }
     }
 
@@ -428,6 +465,30 @@
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
 
+            case id_ploopystuff_maccel_enabled:
+                *value_data = ploopyvia_config.maccel_config.enabled;
+                dprintf("PDACCEL Mouse acceleration acceleration enabled: %d\n", ploopyvia_config.maccel_config.enabled);
+                break;
+
+            case id_ploopystuff_maccel_takeoff:
+                value_data[0] = ploopyvia_config.maccel_config.takeoff*20;
+                dprintf("PDACCEL Mouse acceleration acceleration takeoff: %f\n", ploopyvia_config.maccel_config.takeoff);
+                break;
+
+            case id_ploopystuff_maccel_growth_rate:
+                value_data[0] = ploopyvia_config.maccel_config.growth_rate*20;
+                dprintf("PDACCEL Mouse acceleration acceleration growth rate: %f\n", ploopyvia_config.maccel_config.growth_rate);
+                break;
+
+            case id_ploopystuff_maccel_offset:
+                value_data[0] = ploopyvia_config.maccel_config.offset*10;
+                dprintf("PDACCEL Mouse acceleration acceleration offset: %f\n", ploopyvia_config.maccel_config.offset);
+                break;
+
+            case id_ploopystuff_maccel_limit:
+                value_data[0] = ploopyvia_config.maccel_config.limit*20;
+                dprintf("PDACCEL Mouse acceleration acceleration limit: %f\n", ploopyvia_config.maccel_config.limit);
+                break;
         }
     }
 

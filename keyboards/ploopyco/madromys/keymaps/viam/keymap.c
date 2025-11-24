@@ -23,6 +23,7 @@ enum layers {
     _BASE,
     _FNA,
     _FNB,
+    _MSA,
 };
 
 enum keymap_keycodes {
@@ -39,6 +40,11 @@ enum keymap_keycodes {
     BETTER_DRAG_SCROLL_SNIPER_B_TOGGLE,
     BETTER_DRAG_ACTION_A_MOMENTARY,
     BETTER_DRAG_ACTION_B_MOMENTARY,
+    PDA_TOGG,
+    PDA_TKOF,
+    PDA_GROW,
+    PDA_OFST,
+    PDA_LMT,
 };
 
 enum {
@@ -58,12 +64,13 @@ enum {
 #define P_DRGAA BETTER_DRAG_ACTION_A_MOMENTARY
 #define P_DRGAB BETTER_DRAG_ACTION_B_MOMENTARY
 
+#define P_MS3FA LT(_MSA, MS_BTN3)
 #define P_MS4FA LT(_FNA, MS_BTN4)
 #define P_MS5FB LT(_FNB, MS_BTN5)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
-        P_MS4FA, P_MS5FB, MS_BTN3, MS_BTN2,
+        P_MS4FA, P_MS5FB, P_MS3FA, MS_BTN2,
         MS_BTN1,                   TD(TD_DRAGSCROLL)
     ),
     [_FNA] = LAYOUT(
@@ -73,5 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FNB] = LAYOUT(
         _______, _______, _______, P_SNTGA,
         PL_MSJG,                   P_DRGTG
+    ),
+    [_MSA] = LAYOUT(
+        PDA_TKOF, PDA_GROW, _______, PDA_TOGG,
+        PDA_OFST,                   PDA_LMT
     )
 };

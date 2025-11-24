@@ -184,7 +184,7 @@
             #endif // BETTER_DRAGSCROLL_POINTERINVERT_Y
         #endif // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
 
-        if (better_dragscroll_enabled_bylock || better_dragscroll_enabled_bypress) {
+        if (better_dragscroll_enabled_bylock || better_dragscroll_enabled_bypress || get_highest_layer(layer_state) == 1) {
 
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_divisor_h > 0){
