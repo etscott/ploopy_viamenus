@@ -40,6 +40,7 @@ enum via_ploopystuff_value {
     id_ploopystuff_dragscroll_dragact_b_down,
     id_ploopystuff_dragscroll_dragact_b_left,
     id_ploopystuff_dragscroll_dragact_b_right,
+    id_ploopystuff_dragscroll_dragact_divisor,
     id_ploopystuff_maccel_enabled = 91,
     id_ploopystuff_maccel_takeoff,
     id_ploopystuff_maccel_growth_rate,
@@ -76,6 +77,7 @@ typedef struct {
     uint16_t dragscroll_dragact_b_down;
     uint16_t dragscroll_dragact_b_left;
     uint16_t dragscroll_dragact_b_right;
+    uint8_t  dragscroll_dragact_divisor;
     // bool  pointing_device_accel_enabled : 1;
     // float pointing_device_accel_growth_rate;
     // float pointing_device_accel_offset;
@@ -146,6 +148,8 @@ static via_ploopystuff_config ploopyvia_config_default = {
     .dragscroll_dragact_b_down  = KC_NO,
     .dragscroll_dragact_b_left  = KC_NO,
     .dragscroll_dragact_b_right = KC_NO,
+
+    .dragscroll_dragact_divisor = 4 * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR,
 
     .maccel_config.enabled = 1,
     .maccel_config.takeoff = POINTING_DEVICE_ACCEL_TAKEOFF,

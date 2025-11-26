@@ -261,6 +261,11 @@
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
                 break;
 
+            case id_ploopystuff_dragscroll_dragact_divisor:
+                ploopyvia_config.dragscroll_dragact_divisor = *value_data;
+                dprintf("dragscroll_dragact_divisor:%d\n", ploopyvia_config.dragscroll_dragact_divisor);
+                break;
+
             case id_ploopystuff_maccel_enabled:
                 ploopyvia_config.maccel_config.enabled = *value_data;
                 dprintf("PDACCEL Mouse acceleration acceleration enabled: %d\n", ploopyvia_config.maccel_config.enabled);
@@ -463,6 +468,11 @@
                 value_data[0] = ploopyvia_config.dragscroll_dragact_b_right >> 8;
                 value_data[1] = ploopyvia_config.dragscroll_dragact_b_right & 0xFF;
                 dprintf("dragscroll_dragact_b_right: %d\n", ploopyvia_config.dragscroll_dragact_b_right);
+                break;
+
+            case id_ploopystuff_dragscroll_dragact_divisor:
+                *value_data = ploopyvia_config.dragscroll_dragact_divisor;
+                dprintf("dragscroll_dragact_divisor:%d\n", ploopyvia_config.dragscroll_dragact_divisor);
                 break;
 
             case id_ploopystuff_maccel_enabled:

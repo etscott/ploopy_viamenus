@@ -291,10 +291,10 @@
         else if (better_dragscroll_dragaction_enabled){
             #if defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 if(ploopyvia_config.dragscroll_divisor_h > 0){
-                    dragscroll_acc_h += (float)mouse_report.x / (((float)ploopyvia_config.dragscroll_divisor_h / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                    dragscroll_acc_h += (float)mouse_report.x / (((float)ploopyvia_config.dragscroll_divisor_h / 4) * ((float)ploopyvia_config.dragscroll_dragact_divisor / 4));
                 }
                 if(ploopyvia_config.dragscroll_divisor_v > 0){
-                    dragscroll_acc_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
+                    dragscroll_acc_v += (float)mouse_report.y / (((float)ploopyvia_config.dragscroll_divisor_v / 4) * ((float)ploopyvia_config.dragscroll_dragact_divisor / 4));
                 }
             #else // defined(VIA_ENABLE) && defined(PLOOPY_VIAMENUS)
                 dragscroll_acc_h += (float)mouse_report.x / (BETTER_DRAGSCROLL_DIVISOR_H * BETTER_DRAGSCROLL_DRAGACTION_DIVISOR);
